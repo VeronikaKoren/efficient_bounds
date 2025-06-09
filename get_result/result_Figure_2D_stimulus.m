@@ -22,7 +22,7 @@ tau_s=10;                               % time constant OU stimulus
                                  % duration of the trial in seconds 
 dt=0.01;                                % time step in ms  
 nsec=50;
-
+gL=0.7;
 %% simulate network activity as a function of the network size
 
 parvec_all={1:1:50;5:2.5:50};
@@ -53,7 +53,7 @@ for ii=1:np
     spiketime= cellfun(@(x)  find(sum(x))-1, spikes,'un',0);
     n=cellfun(@numel, spiketime);
 
-    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,p_vec(1));
+    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,gL);
     
     n_good_loss=zeros(2,1);
     n_good_error=zeros(2,1);
@@ -76,7 +76,7 @@ end
 if saveres==1
     savefile=[cd,'/result/'];
     savename=['performance_',nparam_all{test}];
-    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec')
+    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','gL')
     disp('saved result')
     clear
 end

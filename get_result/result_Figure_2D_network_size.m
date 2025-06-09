@@ -67,7 +67,7 @@ end
 if saveres==1
     savefile=[cd,'/result/'];
     savename='performance_network size';
-    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec')
+    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','gL')
     disp('saved result')
     %clear
 end

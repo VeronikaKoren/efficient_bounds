@@ -20,7 +20,7 @@ load(loadname,'M','N','p_vec','tau_vec')
 sigma_s=2;                              % sigma of the OU stimulus
 tau_s=10;                               % time constant OU stimulus
 
-nsec=10;                                 % duration of the trial in seconds 
+nsec=50;                                 % duration of the trial in seconds 
 dt=0.01;                                % time step in ms  
 
 %% connectivity and target signal 
@@ -32,7 +32,7 @@ dt=0.01;                                % time step in ms
 
 parvec_all={0:1:50;0:0.5:16};
 parvec=parvec_all{test};
-%gL=0.5;
+gL=0.7;
 
 %%
 np=length(parvec);
@@ -51,7 +51,7 @@ for ii=1:np
     spiketime= cellfun(@(x)  find(sum(x))-1, spikes,'un',0);
     n=cellfun(@numel, spiketime);
 
-    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,p_vec(1));
+    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,gL);
     
     n_good_loss=zeros(2,1);
     n_good_error=zeros(2,1);
@@ -74,7 +74,7 @@ end
 if saveres==1
     savefile=[cd,'/result/'];
     savename=['performance_',nparam_all{test}];
-    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec')
+    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','gL')
     disp('saved result')
     clear
 end
