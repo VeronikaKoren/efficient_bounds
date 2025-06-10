@@ -5,12 +5,12 @@ clc
 
 savefig=0;
 
-test=1; % pick 1,2,3 or 4 of parameters below
-nparam_all={'mu','sigma','sigmaw_e','sigmaw_ratio','EI_ratio'};
-nparam_plt={'metabolic constant \mu','noise strength \sigma','standard deviation \sigma_w^E','ratio \sigma_w^I : \sigma_w^E','N^E : N^I'};
+test=3; % pick 1,2 or 3  
+nparam_all={'mu','sigma','g'};
+nparam_plt={'metabolic constant \mu','noise strength \sigma','weighting error vs. cost g'};
 
 addpath([cd,'/result/'])
-savefile=pwd;
+savefile='/Users/vkoren/limit_spiking/figure/';
 
 loadname=['performance_',nparam_all{test}];
 load(loadname);
@@ -18,7 +18,7 @@ load(loadname);
 loadname='optimal_params';
 load(loadname,'p_vec')
 
-defaults=[p_vec(1:2)',1,p_vec(4),p_vec(2)];
+defaults=[p_vec(1:2)',0.7];
 
 figname=['prop_spikes_',nparam_all{test}];
 
@@ -57,16 +57,20 @@ line([defaults(test) defaults(test)],[0.5,1.0],'Color','k','LineStyle',':','Line
 set(gca,'YTick',yt)
 set(gca,'YTickLabel',yt,'fontsize',fs)
 
-xt=get(gca,'XTick');
-if test==2
-    set(gca,'XTick',[0,7,14],'fontsize',fs)
-%elseif test==3
-%    set(gca,'XTick',xt([1,2,3]),'fontsize',fs)
-else
+if test==1
+    xt=get(gca,'XTick');
     set(gca,'XTick',[min(parvec),xt(3),xt(5)])
-    %set(gca,'XTick',xt([1,3,5]),'fontsize',fs)
+elseif test==2
+    set(gca,'XTick',[0,7,14],'fontsize',fs)
+elseif test==3
+    set(gca,'XTick',[0,0.5,1],'fontsize',fs)
+
 end
-axis([0,max(parvec),0.45,1.05])
+if test<3
+    axis([0,max(parvec),0.45,1.05])
+else
+    axis([0,1,0.45,1.05])
+end
 
 op=get(gca,'OuterPosition');
 set(gca,'OuterPosition',[op(1)+0.03 op(2)+0.03 op(3)-0.05 op(4)-0.02])
@@ -84,18 +88,3 @@ if savefig==1
 end
 
 %%
-if test==2
-    [~,idx]=max(prop_good_loss(:,1));
-    display(parvec(idx),'optimal according to E neurons')
-    [~,idx]=max(prop_good_loss(:,2));
-    display(parvec(idx),'optimal according to I neurons')
-end
-
-%{
-axes
-h1 = xlabel(,'Position',[0.5,-0.06,0],'fontsize',fs);
-h2 = ylabel('proportion spikes','Position',[-0.1,0.5,0],'fontsize',fs);
-set(gca,'Visible','off')
-set(h1,'visible','on')
-set(h2,'visible','on')
-%}
