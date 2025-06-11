@@ -3,15 +3,14 @@ clear
 close all
 clc
 
-savefig=0;
+savefig=1;
 
-
-test=4; % pick 1,2 or 3 of parameters below
+test=3; % pick 1,2 or 3 of parameters below
 nparam_all={'network_size','M','tau_s','sigma_s'};
-nparam_plt={'network size (N^E)','number of stimuli M','time const. stim. \tau_s','variance stimulus \sigma_s'}; % 
+nparam_plt={'Network size (N^E)','Number of stimuli M','Time const. stim. \tau_s [ms]','variance stimulus \sigma_s'}; % 
 
 addpath([cd,'/result/'])
-savefile=pwd;
+savefile='/Users/vkoren/limit_spiking/figure/parameters/decreasing_loss/';
 
 loadname=['performance_',nparam_all{test}];
 load(loadname);
@@ -81,7 +80,7 @@ set(gca,'OuterPosition',[op(1)+0.03 op(2)+0.03 op(3)-0.05 op(4)-0.02])
 
 xlabel(nparam_plt{test})
 if test==1
-    ylabel('prop. efficient spikes')
+    ylabel('Prop. efficient spikes')
 end
 
 set(H, 'Units','centimeters', 'Position', pos_vec)

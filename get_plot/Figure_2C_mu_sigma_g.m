@@ -3,14 +3,14 @@ clear
 close all
 clc
 
-savefig=0;
+savefig=1;
 
-test=3; % pick 1,2 or 3  
+test=2; % pick 1,2 or 3  
 nparam_all={'mu','sigma','g'};
-nparam_plt={'metabolic constant \mu','noise strength \sigma','weighting error vs. cost g'};
+nparam_plt={'Metabolic constant \mu [mV]','Noise strength \sigma [mV]','Weighting error vs. cost g'};
 
 addpath([cd,'/result/'])
-savefile='/Users/vkoren/limit_spiking/figure/';
+savefile='/Users/vkoren/limit_spiking/figure/parameters/decreasing_loss/';
 
 loadname=['performance_',nparam_all{test}];
 load(loadname);
@@ -77,7 +77,7 @@ set(gca,'OuterPosition',[op(1)+0.03 op(2)+0.03 op(3)-0.05 op(4)-0.02])
 
 xlabel(nparam_plt{test})
 if test==1
-    ylabel('prop. efficient spikes')
+    ylabel('Prop. efficient spikes')
 end
 
 set(H, 'Units','centimeters', 'Position', pos_vec)
