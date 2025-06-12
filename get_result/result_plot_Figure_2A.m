@@ -30,8 +30,8 @@ tau_s=10;                               % time constant O-U stimulus
 
 %% get error, cost and loss
 
-gL=0.7; % weighting of the error with the cost; 0<gL<1
-[error,cost,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,gL);
+g=0.7; % weighting of the error with the cost; 0<g<1
+[error,cost,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,g);
 
 %%
 

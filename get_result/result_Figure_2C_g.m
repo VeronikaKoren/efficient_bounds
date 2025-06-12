@@ -1,5 +1,5 @@
 % computes the proportion of loss-correcting spikes as a function of
-% weighting g
+% weighting of the error with the cost g
 
 close all
 clear
@@ -53,7 +53,6 @@ for ii=1:ng
 end
 
 % prop spikes descreasing the loss
-
 prop_good_loss=n_good_loss./n';
 
 %% plot

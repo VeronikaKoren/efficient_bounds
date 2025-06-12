@@ -18,8 +18,7 @@ tau_s=10;                               % time constant OU stimulus
 nsec=10;                                 % duration of the trial in seconds 
 dt=0.01;                                % time step in ms  
 
-%gL=0.5;
-mu=p_vec(1);
+g=0.7;
 
 %% simulate network activity and get spike times
 
@@ -34,7 +33,7 @@ n=cellfun(@numel, spiketime);
 
 %% proportion of spikes decreasing the loss
  
-[error,cost,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,mu);
+[error,cost,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,g);
 
 n_good_loss=zeros(2,1);
 n_good_error=zeros(2,1);

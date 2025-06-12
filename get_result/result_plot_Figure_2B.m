@@ -21,19 +21,16 @@ dt=0.01;                                 % time step in ms
 sigma_s=2;                              % sigma of the O-U stimulus
 tau_s=10;                               % time constant O-U stimulus
 
-
 %% simulate network activity
 
 [w,J] = w_fun(M,N,p_vec(3),p_vec(4));               % decoding weights and connectivity matrices
-
 [s,x]=signal_fun(tau_s,sigma_s,tau_vec(1),M,nsec,dt); % compute the stimulus and the target signal
-
 [fe,fi,xhat_e,xhat_i,re,ri] =net_fun_complete(dt,s,w,J,tau_vec,p_vec); % integrate biophysical model
 
 %% get eror cost and loss over time
 
-gL=0.7; % weighting of the error with the cost; 0<gL<1
-[error,cost,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,gL);
+g=0.7; % weighting of the error with the cost; 0<gL<1
+[error,cost,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,g);
 
 %% compute spike-triggered error, cost and loss
 
@@ -83,13 +80,10 @@ lw=1.7;
 lwa=1;
 tl=0.01;
 
-
 red=[0.85,0.32,0.1];
 blue=[0,0.48,0.74];
 gray=[0.5,0.5,0.5];
 col={red,blue};
-fs=10;
-lw=1.7;
 
 namepop={'E neurons','I neurons'};
 pos_vec = [0, 0, 16, 6];

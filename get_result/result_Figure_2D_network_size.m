@@ -15,11 +15,12 @@ addpath([cd,'/function/'])
 loadname='optimal_params';
 load(loadname,'M','N','p_vec','tau_vec')
 
+nsec=50;
 sigma_s=2;                              % sigma of the OU stimulus
 tau_s=10;                               % time constant OU stimulus
                                  % duration of the trial in seconds 
 dt=0.01;                                % time step in ms  
-
+g=0.7;
 %% simulate network activity as a function of the network size
 
 parvec=[25:25:400,800,1600];
@@ -33,7 +34,6 @@ for ii=1:np
     display(np-ii+1,'remaining')
     N=parvec(ii);
 
-    
     [s,x]=signal_fun(tau_s,sigma_s,tau_vec(1),M,nsec,dt);
     [w,J] = w_fun(M,N,p_vec(3),p_vec(4));               % selectivity and connectivity
 
@@ -44,7 +44,7 @@ for ii=1:np
     spiketime= cellfun(@(x)  find(sum(x))-1, spikes,'un',0);
     n=cellfun(@numel, spiketime);
 
-    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,p_vec(1));
+    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,g);
     
     n_good_loss=zeros(2,1);
     n_good_error=zeros(2,1);
@@ -67,7 +67,7 @@ end
 if saveres==1
     savefile=[cd,'/result/'];
     savename='performance_network size';
-    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','gL')
+    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','g')
     disp('saved result')
     %clear
 end

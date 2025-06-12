@@ -1,5 +1,5 @@
 % computes the proportion of error-correcting spikes and proportion of
-% spikes decreasing the loss as a function of one model parameter at a time
+% spikes decreasing the loss as a function of the metaboli cost mu or noise intensity sigma
 
 close all
 clear
@@ -22,17 +22,12 @@ tau_s=10;                               % time constant OU stimulus
 
 nsec=50;                                 % duration of the trial in seconds 
 dt=0.01;                                % time step in ms  
-
-%% connectivity and target signal 
-
-[w,J] = w_fun(M,N,p_vec(3),p_vec(4));               % selectivity and connectivity
-[s,x]=signal_fun(tau_s,sigma_s,tau_vec(1),M,nsec,dt); % compute the stimulus and the target signal
+g=0.7;
 
 %% simulate network activity as a function of parameter par
 
 parvec_all={0:1:50;0:0.5:16};
 parvec=parvec_all{test};
-gL=0.7;
 
 %%
 np=length(parvec);
@@ -44,6 +39,9 @@ for ii=1:np
     display(np-ii+1,'remaining')
     p_vec(test)=parvec(ii);
 
+    [w,J] = w_fun(M,N,p_vec(3),p_vec(4));               % decoding weights and connectivity
+    [s,x]=signal_fun(tau_s,sigma_s,tau_vec(1),M,nsec,dt); % stimulus and target signal
+
     spikes=cell(2,1);
     [spikes{1},spikes{2},xhat_e,xhat_i,re,ri] = net_fun_complete(dt,s,w,J,tau_vec,p_vec); % integrate network activity and compute estimates
 
@@ -51,7 +49,7 @@ for ii=1:np
     spiketime= cellfun(@(x)  find(sum(x))-1, spikes,'un',0);
     n=cellfun(@numel, spiketime);
 
-    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,gL);
+    [error,~,loss] = performance_fun(x,xhat_e,xhat_i,re,ri,g);
     
     n_good_loss=zeros(2,1);
     n_good_error=zeros(2,1);
@@ -74,7 +72,7 @@ end
 if saveres==1
     savefile=[cd,'/result/'];
     savename=['performance_',nparam_all{test}];
-    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','gL')
+    save([savefile,savename],'parvec','prop_good_error','prop_good_loss','nsec','g')
     disp('saved result')
     clear
 end
