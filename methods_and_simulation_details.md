@@ -9,7 +9,7 @@
 In Figure 1A, we show a simulation of a divergent spiking sequence. The spiking sequence is defined as
 
 ```math
-\{ t_n = 1 - \frac{1}{\sqrt{n}} \Bigg| n = 1, 2, \cdots, N, \; N < \infty \}
+\{ t_n = 1 - \frac{1}{\sqrt{n}} | n = 1, 2, \cdots, N, \; N < \infty \}
 ```
 
 and is computed in the script `result_Figure1.m`.
@@ -53,7 +53,7 @@ In what follows, we briefly describe how model parameters were chosen (for furth
 We integrate stochastic differential equations using Euler's method. A spike is registered and the membrane potential is reset when a neuron hits its threshold. Synaptic delay is one time step.
 
 **Computation of the Squared Error, Metabolic Cost, and Loss.**  
-Using the spiking activity of the network, we compute the population readout $\hat{\vec{x}}^y(t)$ for $y \in \{E,I\}$. The Squared error for E is the squared distance between $\vec{x}(t)$ and $\hat{\vec{x}}^E(t)$; for I, it's between $\hat{\vec{x}}^E(t)$ and $\hat{\vec{x}}^I(t)$. Metabolic cost is computed as the sum of low-pass filtered spikes. Loss is a weighted sum of these two. Results are shown in Figure 2A.
+Using the spiking activity of the network, we compute the population readout $\hat{\vec{x}}^y(t)$ for $y \in \{E,I\}$. The Squared error for E is the squared distance between $\vec{x}(t)$ and $\hat{\vec{x}}^E(t)$ ; for I, it's between $\hat{\vec{x}}^E(t)$ and $\hat{\vec{x}}^I(t)$. Metabolic cost is computed as the sum of low-pass filtered spikes. Loss is a weighted sum of these two. Results are shown in Figure 2A.
 
 **Spike-triggered Averages.**  
 We computed values of variables just before and after spikes and averaged them. A negative jump at lag 0 ms indicates a decrease due to the spike, seen in Squared error and Loss. Metabolic cost always shows a positive jump. Results are in Figure 2B.
