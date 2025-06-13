@@ -9,7 +9,7 @@ d) before running the script, Matlab issues a window about the file not being on
 
 a) Folder “get_result” contains scripts that generate results. Some of the scripts inside this folder also generate a figure.  
 b) Folder “get_plot” contains scripts that generate a figure from computed results.   
-c) Folder “function” contains functions used scripts in “get_results” and in “get_plot”. 
-d) Folder "results" contains .mat files with simulation results. 
-e) File optimal_params.m contains the default set of parameters.
-f) PDF "Simulation details for efficient bounds" contains a table of default model parameters, specifications about numerical integration and other details useful for reproducing the numerical results.
+c) Folder “function” contains functions used scripts in “get_results” and in “get_plot”.  
+d) Folder "results" contains .mat files with simulation results.  
+e) File optimal_params.m contains the default set of parameters.   
+f) The PDF "Simulation details for efficient bounds" contains a table of default model parameters, specifications about numerical integration and other details useful for reproducing the numerical results.
