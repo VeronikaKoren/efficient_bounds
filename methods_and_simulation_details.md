@@ -8,9 +8,7 @@
 
 In Figure 1A, we show a simulation of a divergent spiking sequence. The spiking sequence is defined as
 
-```math
-\{ t_n = 1 - \frac{1}{\sqrt{n}} | n = 1, 2, \cdots, N, \; N < \infty \}
-```
+$$ \{ t_n = 1 - \frac{1}{\sqrt{n}} | n = 1, 2, \cdots, N, \; N < \infty \} $$
 
 and is computed in the script `result_Figure1.m`.
 
