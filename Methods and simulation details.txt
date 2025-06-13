@@ -1,0 +1,243 @@
+Methods and simulation details
+Anonymous Author
+Anonymous Institute
+
+1
+
+Simulation of a divergent spiking sequence
+
+In Figure 1A, we show a simulation of a divergent spiking sequence. The spiking sequence is defined as
+(
+)
+1
+tn = 1 − √ n = 1, 2, · · · , N, N < ∞ ,
+(1)
+n
+and is computed in the script result Figure1.m.
+
+2
+
+Simulation of the biophysical model
+
+Figure 1B and Figure 2 use simulations of the biophysical model developed in previous works Boerlin
+et al. (2013); Koren et al. (2025), consisting of an Excitatory-Inhibitory network of generalized integrateand-fire neurons. The set of parameters necessary to replicate our simulations is specified in Table 1
+and is the same as the default set of parameters in Koren et al. (2025).
+
+Specification of model parameters
+In what follows, we briefly describe how model parameters were chosen (for further details, see Koren
+et al. (2025)). The number of E neurons N E , the number of input stimuli M , and the time constant of
+E
+the stimuli τ and the standard deviation of the distribution of decoding weights of E neurons σw
+were
+chosen for their biological plausibility and computational simplicity. The ratio of the number of E to I
+neurons N E : N I , time constants of adaptation in E and I neurons τrE and τrI , the noise intensity σ, the
+E
+I
+were chosen as
+: σw
+metabolic constant µ and the ratio of standard deviations of decoding weights σw
+parameters that minimize the time-averaged Loss. The time-averaged Loss is defined as the weighted
+sum of the time-averaged square root of the Squared error and the time-averaged square root of the
+Metabolic cost. The default weighting of these two variables in the average Loss is g = 0.7 in profit of
+the Squared error against 1 − g = 0.3 for the Metabolic cost.
+The decoding weights of population y ∈ {E, I} are drawn from a normal distribution with mean µyw and
+y
+standard deviation σw
+specified in the Table 1. Decoding weights are then normalized for each neuron
+following the procedure described in Ref. Koren et al. (2025).
+
+Numerical simulation of the biophysical model
+Numerical integration of the membrane potential. We integrate stochastic differential equations
+describing the time-derivative of the membrane potential of each neuron using Euler integration scheme.
+When a neuron reaches the firing threshold, a spike is registered and the membrane potential is reset to
+the value of the reset potential. The synaptic transmission delay is homogeneous across synapses and
+is set to a single timestep.
+Computation of the Squared error, Metabolic cost and Loss. Using the spiking activity of the
+network, we also compute the population readout of the neural activity x̂y (t) for y ∈ {E, I}. We then
+evaluate the Squared error of the Excitatory (E) population as the time-dependent squared distance
+between the target signal x(t) and the population readout of the activity of E neurons x̂E (t). Similarly,
+the Squared error of the Inhibitory (I) population is computed as the squared distance between the timedependent population readout of E (x̂E (t)) and I neurons (x̂I (t)). The time-dependent Metabolic cost
+of population y is computed as the sum across neurons of the low-pass filtered spiking activity from the
+1
+
+parameter
+
+notation
+
+number of E neurons
+
+N
+
+ratio of E to I neuron numbers
+
+N
+
+E
+
+value
+
+E
+
+:N
+
+400
+I
+
+4:1
+
+number of the input features
+
+M
+
+3
+
+time constant of the population readout (E and I)
+
+τ
+
+10 ms
+
+time constant of the single neuron readout
+
+τrE = τrI
+
+10 ms
+
+σ
+
+5.0 mV
+
+noise strength
+mean of distribution of decoding weights in E and I
+standard deviation of distribution of decoding weights in E
+
+µE
+w
+
+=
+E
+σw
+
+I
+σw
+
+ratio of standard deviations of decoding weights
+metabolic constant
+
+µIw
+
+:
+
+0 (mV)1/2
+1.0 (mV)1/2
+
+E
+σw
+
+µ
+
+3:1
+14 mV
+
+weighting of the Squared error vs the Metabolic cost
+
+g
+
+0.7
+
+time step
+
+dt
+
+0.01 ms
+
+stimulus time constant
+
+τs
+
+10 ms
+
+stimulus variance
+
+σs
+
+2 (mV)1/2
+
+Table 1. Table of default model and stimulus parameters
+The metabolic constant µ and the noise strength σ are assumed to be the same across the E and I
+population, e.g., µE = µI = µ and σ E = σ I = σ.
+notation
+
+NE
+
+M
+
+σ
+
+µ
+
+g
+
+τs
+
+range
+
+25 – 1600
+
+1 – 50
+
+0 – 16 mV
+
+0 – 50 mV
+
+0–1
+
+5 – 50 ms
+
+Table 2. Parameter ranges used for parameter exploration
+We vary the network size by varying the number of E neurons N E and keeping constant the ratio of the
+number of E to I neurons at its default value of 4:1, thus jointly varying the number of E and I neurons
+in the network.
+
+population y ∈ {E, I}. Finally, the time-dependent empirical Loss for populations of E and I neurons is
+computed as a weighted sum of the Squared error and Metabolic cost, using weighting g. The Squared
+error, Metabolic cost and Loss of E neurons were reported on Figure 2A, together with the sum (across
+neurons) of all spikes fired by the E population (computed with script result plot Figure 2A.m).
+Spike-triggered averages. We evaluated the spike-triggered variables (Squared error, Metabolic cost
+and Loss) by computing the value of the respective variable shortly before and after each spiking event
+and averaging across spiking events. If the variable typically decreases at the time of a spike, its spiketriggered average has a negative jump at time lag of 0 milliseconds. This is typically the case of the
+Squared error and of the Loss. Conversely, if the variable increases at spike times, its spike-triggered
+average has a positive jump at zero time lag. This is always the case of the Metabolic cost. Spiketriggered averages were reported on Figure 2B (computed with script result plot Figure 2B.m).
+Proportion of error-decreasing and loss-decreasing spikes. To compute the proportion of errordecreasing spikes, we evaluated the difference of the Squared error in a timestep before and after every
+spike. If the difference is negative, the spike decreased the Squared error and is counted as an errordecreasing spike. We measured the number of error-decreasing spikes over a (50 seconds) long simulation
+trial, and divided the number of such spikes with the number of all fired spikes, thus getting the
+proportion of error-decreasing spikes. The computation of the proportion of loss-decreasing spikes
+follows the same procedure, using the time-dependent Loss instead of the Squared error. We computed
+these measures for the E and I population.
+The proportion of the error- and loss-decreasing spikes for the model with parameters in Table 1 is
+reported numerically in the Results and computed in script result proportion good spikes.m.
+2
+
+Parameter exploration. Finally, we evaluated the proportion of loss-decreasing (efficient) spikes as
+we varied key model and stimulus parameters. We varied one parameter at the time, keeping other
+parameters at default values as specified in Table 1. The parameters were varied within ranges specified
+in Table 2. How the proportion of efficient spikes varies with parameters is shown on Figure 2 C and
+D. These results were computed with the scripts result Figure 2C mu sigma.m (parameters µ and
+σ), result Figure 2C g.m (parameter g), result Figure 2C network size.m (parameter N E ), and
+result Figure 2C stimulus.m (parameters M and τs ).
+
+Computation time
+The simulation of the biophysical model including the computation of decoding weights, connectivity,
+stimulus, target signal and integration of the membrane potentials for 10 seconds of simulation time
+takes approximately 53 seconds on a laptop. Most of the computation time is spent integrating the
+membrane potentials.
+
+References
+Boerlin, M., Machens, C. K., and Denève, S. (2013). Predictive coding of dynamical variables in balanced
+spiking networks. PLoS Comput Biol, 9(11):e1003258.
+Koren, V., Malerba, S. B., Schwalger, T., and Panzeri, S. (2025). Efficient coding in biophysically
+realistic excitatory-inhibitory spiking networks. eLife, 13:RP99545.
+
+3
+
+
