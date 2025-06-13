@@ -30,14 +30,14 @@ In what follows, we briefly describe how model parameters were chosen (for furth
 | Time constant of population readout (E and I) | $\tau$ | 10 ms |
 | Time constant of single neuron readout | $\tau_r^E = \tau_r^I$ | 10 ms |
 | Noise strength | $\sigma$ | 5.0 mV |
-| Mean of decoding weights (E and I) | $\mu_w^E = \mu_w^I$ | 0 (mV)$^{1/2}$ |
-| Std. dev. of decoding weights (E) | $\sigma_w^E$ | 1.0 (mV)$^{1/2}$ |
+| Mean of decoding weights (E and I) | $\mu_w^E = \mu_w^I$ | 0 $(mV)^ {1/2}$ |
+| Std. dev. of decoding weights (E) | $\sigma_w^E$ | 1.0 $(mV)^ {1/2}$ |
 | Ratio of std. devs. of decoding weights | $\sigma_w^I : \sigma_w^E$ | 3:1 |
 | Metabolic constant | $\mu$ | 14 mV |
 | Squared error vs Metabolic cost weight | $g$ | 0.7 |
 | Time step | dt | 0.01 ms |
 | Stimulus time constant | $\tau_s$ | 10 ms |
-| Stimulus variance | $\sigma_s$ | 2 (mV)$^{1/2}$ |
+| Stimulus variance | $\sigma_s$ | 2 $(mV)^ {1/2}$ |
 
 ### Table 2: Parameter Ranges for Exploration
 
