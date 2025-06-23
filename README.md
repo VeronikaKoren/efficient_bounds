@@ -1,7 +1,9 @@
 This code repository was written by Veronika Koren and Gabriel Matias Lorenz, members of the Institute of Neural Information Processing, Center for Molecular Neurobiology Hamburg,
 University Medical Center Hamburg-Eppendorf, Hamburg, Germany. 
 
-This code repository is associated to the paper _Firing rates and representational error in efficient spiking networks are bounded by design_ by authors M. Urdu, GM Lorenz, CP Huang, S Panzeri and V Koren, accepted to appear in proceedings of **The 34th International Conference on Artificial Neural Networks (ICANN 2025)**.
+This code repository is associated to the paper _Firing rates and representational error in efficient spiking networks are bounded by design_ by authors M Urdu, GM Lorenz, CP Huang, S Panzeri and V Koren, accepted to appear in proceedings of **The 34th International Conference on Artificial Neural Networks (ICANN 2025)**.
+
+The copy of this repository is publicly available at Zenodo and has the following citation: Veronika Koren. (2025). VeronikaKoren/efficient_bounds: First release (v1.0). Zenodo. https://doi.org/10.5281/zenodo.15720894
 
 **How to open and run a script** 
 
